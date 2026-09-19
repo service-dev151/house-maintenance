@@ -1,6 +1,6 @@
 /**
- * House Maintenance - Core Vanilla JavaScript
- * Service Areas: Ajman, Sharjah, Umm Al Quwain, UAE
+ * House Maintenance 24 Hours - Core Vanilla JavaScript
+ * Service Areas: Dubai, Ajman, Sharjah, Umm Al Quwain, UAE
  * GitHub Pages Compatible - Zero External Dependencies
  */
 
@@ -15,7 +15,43 @@ document.addEventListener('DOMContentLoaded', () => {
   const PHONE_DIRECT = '+971522929187';
 
   /* --------------------------------------------------------------------------
-     2. MOBILE NAVIGATION MENU TOGGLE (DRAWER & BACKDROP)
+     2. LIGHT / DARK THEME TOGGLE
+     -------------------------------------------------------------------------- */
+  const themeToggle = document.getElementById('theme-toggle');
+  const prefersDarkScheme = window.matchMedia('(prefers-color-scheme: dark)');
+
+  const applyTheme = (theme) => {
+    document.body.setAttribute('data-theme', theme);
+
+    if (themeToggle) {
+      const icon = themeToggle.querySelector('.theme-toggle__icon');
+      const label = themeToggle.querySelector('.theme-toggle__text');
+
+      if (icon) {
+        icon.textContent = theme === 'dark' ? '🌙' : '☀️';
+      }
+
+      if (label) {
+        label.textContent = theme === 'dark' ? 'Dark' : 'Light';
+      }
+    }
+
+    localStorage.setItem('house-maintenance-theme', theme);
+  };
+
+  const savedTheme = localStorage.getItem('house-maintenance-theme');
+  const initialTheme = savedTheme || 'dark';
+  applyTheme(initialTheme);
+
+  if (themeToggle) {
+    themeToggle.addEventListener('click', () => {
+      const nextTheme = document.body.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+      applyTheme(nextTheme);
+    });
+  }
+
+  /* --------------------------------------------------------------------------
+     3. MOBILE NAVIGATION MENU TOGGLE (DRAWER & BACKDROP)
      -------------------------------------------------------------------------- */
   const navToggle = document.getElementById('nav-toggle');
   const mainNav = document.getElementById('main-nav');
@@ -142,7 +178,48 @@ document.addEventListener('DOMContentLoaded', () => {
   handleScroll();
 
   /* --------------------------------------------------------------------------
-     4. SERVICE DETAILS TABS (INTERACTIVE SCOPE WITH MOBILE SCROLL)
+     4. HERO CAROUSEL SLIDES
+     -------------------------------------------------------------------------- */
+  const heroBackgroundSlides = document.querySelectorAll('.hero-background-carousel img');
+
+  let heroSlideIndex = 0;
+  let heroAutoRotate = null;
+
+  const showHeroSlide = (index) => {
+    if (heroBackgroundSlides.length === 0) return;
+
+    const totalSlides = heroBackgroundSlides.length;
+    heroSlideIndex = (index + totalSlides) % totalSlides;
+
+    heroBackgroundSlides.forEach((slide, slideIndex) => {
+      slide.classList.toggle('is-active', slideIndex === heroSlideIndex);
+      slide.style.transform = slideIndex === heroSlideIndex ? 'translateX(0)' : 'translateX(24px)';
+      slide.style.opacity = slideIndex === heroSlideIndex ? '1' : '0';
+    });
+  };
+
+  const stopHeroRotation = () => {
+    if (heroAutoRotate) {
+      clearInterval(heroAutoRotate);
+      heroAutoRotate = null;
+    }
+  };
+
+  const startHeroRotation = () => {
+    if (heroBackgroundSlides.length <= 1) return;
+    stopHeroRotation();
+    heroAutoRotate = setInterval(() => {
+      showHeroSlide(heroSlideIndex + 1);
+    }, 4500);
+  };
+
+  if (heroBackgroundSlides.length > 0) {
+    showHeroSlide(0);
+    startHeroRotation();
+  }
+
+  /* --------------------------------------------------------------------------
+     5. SERVICE DETAILS TABS (INTERACTIVE SCOPE WITH MOBILE SCROLL)
      -------------------------------------------------------------------------- */
   const tabButtons = document.querySelectorAll('.tab-btn');
   const tabPanes = document.querySelectorAll('.tab-pane');
@@ -377,5 +454,5 @@ Please contact me regarding the service.`;
     });
   });
 
-  console.log('House Maintenance website initialized successfully. Serving Ajman, Sharjah & Umm Al Quwain.');
+  console.log('House Maintenance 24 Hours website initialized successfully. Serving Dubai, Ajman, Sharjah & Umm Al Quwain.');
 });

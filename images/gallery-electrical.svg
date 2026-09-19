@@ -1,0 +1,45 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 400" width="600" height="400">
+  <defs>
+    <linearGradient id="bg-elec" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#1e1b4b"/>
+      <stop offset="100%" stop-color="#312e81"/>
+    </linearGradient>
+  </defs>
+  <rect width="600" height="400" fill="url(#bg-elec)"/>
+  <circle cx="480" cy="100" r="160" fill="#f59e0b" fill-opacity="0.06"/>
+  <g opacity="0.1" stroke="#ffffff" stroke-width="1.5">
+    <line x1="0" y1="50" x2="600" y2="50"/>
+    <line x1="0" y1="100" x2="600" y2="100"/>
+    <line x1="0" y1="150" x2="600" y2="150"/>
+    <line x1="0" y1="200" x2="600" y2="200"/>
+    <line x1="0" y1="250" x2="600" y2="250"/>
+    <line x1="0" y1="300" x2="600" y2="300"/>
+    <line x1="0" y1="350" x2="600" y2="350"/>
+  </g>
+  <!-- Electrical Panel & Circuit Elements -->
+  <g transform="translate(300, 175)" text-anchor="middle">
+    <rect x="-110" y="-80" width="220" height="160" rx="12" fill="#1e1b4b" stroke="#6366f1" stroke-width="4"/>
+    <!-- Breaker Switches -->
+    <g transform="translate(-80, -50)">
+      <rect x="0" y="0" width="22" height="45" rx="3" fill="#312e81" stroke="#f59e0b" stroke-width="2"/>
+      <rect x="3" y="5" width="16" height="15" rx="2" fill="#f59e0b"/>
+      
+      <rect x="35" y="0" width="22" height="45" rx="3" fill="#312e81" stroke="#10b981" stroke-width="2"/>
+      <rect x="38" y="25" width="16" height="15" rx="2" fill="#10b981"/>
+      
+      <rect x="70" y="0" width="22" height="45" rx="3" fill="#312e81" stroke="#f59e0b" stroke-width="2"/>
+      <rect x="73" y="5" width="16" height="15" rx="2" fill="#f59e0b"/>
+      
+      <rect x="105" y="0" width="22" height="45" rx="3" fill="#312e81" stroke="#10b981" stroke-width="2"/>
+      <rect x="108" y="25" width="16" height="15" rx="2" fill="#10b981"/>
+      
+      <rect x="140" y="0" width="22" height="45" rx="3" fill="#312e81" stroke="#f59e0b" stroke-width="2"/>
+      <rect x="143" y="5" width="16" height="15" rx="2" fill="#f59e0b"/>
+    </g>
+    <!-- Lightning Flash Badge -->
+    <path d="M10 20 L25 20 L5 65 L40 10 L25 10 Z" fill="#fbbf24" stroke="#d97706" stroke-width="2" transform="translate(-20, 0)"/>
+  </g>
+  <rect x="40" y="325" width="185" height="38" rx="8" fill="#d97706" fill-opacity="0.9"/>
+  <text x="55" y="349" fill="#ffffff" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="14" font-weight="700" letter-spacing="0.5">ELECTRICAL WORK</text>
+  <text x="560" y="349" text-anchor="end" fill="#94a3b8" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="12" font-weight="500">Service Category Showcase</text>
+</svg>
