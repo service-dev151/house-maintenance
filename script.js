@@ -20,6 +20,23 @@ document.addEventListener('DOMContentLoaded', () => {
   const themeToggle = document.getElementById('theme-toggle');
   const prefersDarkScheme = window.matchMedia('(prefers-color-scheme: dark)');
 
+  const syncHeaderMetrics = () => {
+    const topBar = document.querySelector('.top-bar');
+    const siteHeader = document.getElementById('header');
+    const root = document.documentElement;
+
+    if (topBar) {
+      root.style.setProperty('--topbar-height', `${topBar.offsetHeight}px`);
+    }
+
+    if (siteHeader) {
+      root.style.setProperty('--navbar-height', `${siteHeader.offsetHeight}px`);
+    }
+
+    const totalHeaderHeight = (topBar ? topBar.offsetHeight : 0) + (siteHeader ? siteHeader.offsetHeight : 0);
+    root.style.setProperty('--header-total-height', `${totalHeaderHeight}px`);
+  };
+
   const applyTheme = (theme) => {
     document.body.setAttribute('data-theme', theme);
 
@@ -135,13 +152,13 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   /* --------------------------------------------------------------------------
-     3. STICKY HEADER & SCROLL SPY
+     3. HEADER SHADOW + SCROLL SPY (navbar remains visible at all times)
      -------------------------------------------------------------------------- */
   const header = document.getElementById('header');
   const sections = document.querySelectorAll('main section[id]');
+  const backToTopButton = document.getElementById('back-to-top');
 
   const handleScroll = () => {
-    // Header shadow on scroll
     if (header) {
       if (window.scrollY > 20) {
         header.classList.add('is-scrolled');
@@ -150,7 +167,11 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     }
 
-    // ScrollSpy active link detection
+    if (backToTopButton) {
+      const shouldShow = window.scrollY > 350;
+      backToTopButton.classList.toggle('is-visible', shouldShow);
+    }
+
     const headerOffset = header ? header.offsetHeight + 40 : 100;
     const scrollPosition = window.scrollY + headerOffset;
 
@@ -173,6 +194,23 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     });
   };
+
+  if (backToTopButton) {
+    backToTopButton.addEventListener('click', () => {
+      window.scrollTo({
+        top: 0,
+        behavior: 'smooth'
+      });
+    });
+  }
+
+  syncHeaderMetrics();
+  window.addEventListener('resize', () => {
+    syncHeaderMetrics();
+    if (window.innerWidth > 1024 && mainNav && mainNav.classList.contains('is-open')) {
+      closeMenu();
+    }
+  });
 
   window.addEventListener('scroll', handleScroll, { passive: true });
   handleScroll();

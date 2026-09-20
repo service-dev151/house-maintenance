@@ -9,6 +9,11 @@
    1. CSS VARIABLES & DESIGN TOKENS
    -------------------------------------------------------------------------- */
 :root {
+  /* Fixed header sizing measured from the live layout */
+  --topbar-height: 42px;
+  --navbar-height: 72px;
+  --header-total-height: calc(var(--topbar-height) + var(--navbar-height));
+
   /* Brand Color Palette */
   --color-primary: #111827;
   --color-primary-dark: #0b1220;
@@ -335,6 +340,8 @@ ol {
   padding-right: clamp(1rem, 3.5vw, 1.5rem);
 }
 
+
+
 /* --------------------------------------------------------------------------
    3. REUSABLE ATOMS: BUTTONS & BADGES
    -------------------------------------------------------------------------- */
@@ -506,6 +513,42 @@ ol {
   background-color: #f8fafc;
 }
 
+.back-to-top {
+  position: fixed;
+  right: clamp(1rem, 2vw, 1.5rem);
+  bottom: clamp(1rem, 2vw, 1.5rem);
+  width: 52px;
+  height: 52px;
+  border: none;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-accent) 100%);
+  color: #ffffff;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.6rem;
+  line-height: 1;
+  box-shadow: 0 12px 32px rgba(17, 24, 39, 0.18);
+  cursor: pointer;
+  z-index: 1500;
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transform: translateY(14px);
+  transition: opacity var(--transition-fast), visibility var(--transition-fast), transform var(--transition-fast), box-shadow var(--transition-fast);
+}
+
+.back-to-top:hover {
+  box-shadow: 0 16px 36px rgba(17, 24, 39, 0.22);
+}
+
+.back-to-top.is-visible {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+  transform: translateY(0);
+}
+
 .btn--whatsapp-banner {
   background-color: var(--color-whatsapp);
   color: #ffffff;
@@ -538,8 +581,10 @@ ol {
    4. HEADER & NAVIGATION
    -------------------------------------------------------------------------- */
 .top-bar {
-  position: sticky;
+  position: fixed;
   top: 0;
+  left: 0;
+  width: 100%;
   z-index: 1100;
   background-color: var(--color-primary-dark);
   color: #cbd5e1;
@@ -593,8 +638,10 @@ ol {
 
 /* Main Site Header */
 .site-header {
-  position: sticky;
-  top: 42px;
+  position: fixed;
+  top: var(--topbar-height);
+  left: 0;
+  width: 100%;
   z-index: 1000;
   background: rgba(255, 253, 249, 0.94);
   backdrop-filter: blur(12px);
@@ -605,6 +652,14 @@ ol {
 
 .site-header.is-scrolled {
   box-shadow: 0 8px 24px rgba(17, 24, 39, 0.07);
+}
+
+main {
+  padding-top: var(--header-total-height);
+}
+
+section[id] {
+  scroll-margin-top: calc(var(--header-total-height) + 16px);
 }
 
 .site-header__inner {
@@ -2550,7 +2605,7 @@ body[data-theme="dark"] .hero-section {
 
   .top-bar {
     display: block;
-    position: sticky;
+    position: fixed;
   }
 
   .top-bar__inner {
@@ -2576,7 +2631,11 @@ body[data-theme="dark"] .hero-section {
   }
 
   .site-header {
-    top: 0;
+    top: var(--topbar-height);
+  }
+
+  main {
+    padding-top: var(--header-total-height);
   }
 
   .site-header__inner {
