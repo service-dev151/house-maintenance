@@ -40,7 +40,7 @@ document.addEventListener('DOMContentLoaded', () => {
   };
 
   const savedTheme = localStorage.getItem('house-maintenance-theme');
-  const initialTheme = savedTheme || 'dark';
+  const initialTheme = savedTheme || (prefersDarkScheme.matches ? 'dark' : 'light');
   applyTheme(initialTheme);
 
   if (themeToggle) {
@@ -193,8 +193,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
     heroBackgroundSlides.forEach((slide, slideIndex) => {
       slide.classList.toggle('is-active', slideIndex === heroSlideIndex);
-      slide.style.transform = slideIndex === heroSlideIndex ? 'translateX(0)' : 'translateX(24px)';
-      slide.style.opacity = slideIndex === heroSlideIndex ? '1' : '0';
     });
   };
 

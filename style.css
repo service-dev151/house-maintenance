@@ -809,27 +809,32 @@ body[data-theme="dark"] .hero-section {
 .hero-background-carousel {
   position: absolute;
   inset: 0;
-  z-index: 0;
+  width: 100%;
+  height: 100%;
   overflow: hidden;
+  z-index: -1;
   pointer-events: none;
 }
 
 .hero-background-carousel img {
   position: absolute;
   inset: 0;
+  display: block;
   width: 100%;
   height: 100%;
   min-height: 100%;
   object-fit: cover;
   object-position: center;
   opacity: 0;
-  transform: translateX(24px) scale(1.02);
-  transition: opacity 0.9s ease, transform 0.9s ease, filter 0.9s ease;
+  visibility: hidden;
+  transform: translateX(-24px) scale(1.02);
+  transition: opacity 0.9s ease, transform 0.9s ease, filter 0.9s ease, visibility 0.9s ease;
   filter: saturate(1.15) contrast(1.05) brightness(0.72);
 }
 
 .hero-background-carousel img.is-active {
   opacity: 1;
+  visibility: visible;
   transform: translateX(0) scale(1.02);
 }
 
@@ -2528,8 +2533,50 @@ body[data-theme="dark"] .hero-section {
 
 /* TABLETS & PHONES (<= 768px) */
 @media (max-width: 768px) {
+  /* Hero background carousel — show complete image, no cropping on mobile */
+  .hero-background-carousel {
+    background-color: #0a0f1a; /* dark fill for letterbox gaps */
+  }
+
+  .hero-background-carousel img {
+    object-fit: contain;
+    object-position: center center;
+    transform: translateX(-24px) scale(1);
+  }
+
+  .hero-background-carousel img.is-active {
+    transform: translateX(0) scale(1);
+  }
+
   .top-bar {
-    display: none; /* Hide announcement bar on mobile for viewport economy */
+    display: block;
+    position: sticky;
+  }
+
+  .top-bar__inner {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .top-bar__left,
+  .top-bar__right {
+    width: 100%;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 6px;
+  }
+
+  .top-bar__areas,
+  .top-bar__link {
+    flex-wrap: wrap;
+    white-space: normal;
+    line-height: 1.4;
+    word-break: break-word;
+  }
+
+  .site-header {
+    top: 0;
   }
 
   .site-header__inner {
