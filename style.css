@@ -2588,19 +2588,37 @@ body[data-theme="dark"] .hero-section {
 
 /* TABLETS & PHONES (<= 768px) */
 @media (max-width: 768px) {
-  /* Hero background carousel — show complete image, no cropping on mobile */
+  /* Hero background carousel — keep the full image visible below the fixed header on mobile */
+  .hero-section {
+    min-height: clamp(430px, 58vh, 560px);
+    padding-top: 0;
+    padding-bottom: 1.25rem;
+  }
+
   .hero-background-carousel {
-    background-color: #0a0f1a; /* dark fill for letterbox gaps */
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    background-color: #0a0f1a;
   }
 
   .hero-background-carousel img {
+    width: 100%;
+    height: 100%;
     object-fit: contain;
     object-position: center center;
-    transform: translateX(-24px) scale(1);
+    transform: translateX(0) scale(1);
+    filter: saturate(1.08) contrast(1.04) brightness(0.72);
   }
 
   .hero-background-carousel img.is-active {
     transform: translateX(0) scale(1);
+  }
+
+  .hero-section__inner {
+    position: relative;
+    z-index: 2;
+    padding-top: clamp(0.5rem, 1vw, 1rem);
   }
 
   .top-bar {
@@ -2787,6 +2805,14 @@ body[data-theme="dark"] .hero-section {
     font-size: 0.65rem;
   }
 
+  .hero-section {
+    min-height: clamp(390px, 52vh, 470px);
+  }
+
+  .hero-background-carousel img {
+    object-position: center top;
+  }
+
   .header-actions .btn--whatsapp-sm span {
     display: none; /* Icon-only WhatsApp button on compact header */
   }
@@ -2811,6 +2837,10 @@ body[data-theme="dark"] .hero-section {
 
 /* ULTRA-COMPACT SMARTPHONES (<= 360px & 320px) */
 @media (max-width: 360px) {
+  .hero-section {
+    min-height: clamp(350px, 48vh, 420px);
+  }
+
   .container {
     padding-left: 12px;
     padding-right: 12px;
