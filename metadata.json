@@ -1,0 +1,8 @@
+{
+  "name": "General Building Maintenance 24",
+  "description": "Professional 24/7 residential and commercial home maintenance services across Dubai, Ajman, Sharjah, and Umm Al Quwain, UAE.",
+  "permissions": [],
+  "capabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
+}

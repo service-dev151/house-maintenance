@@ -1,14 +1,14 @@
-# House Maintenance 24 Hours Website
+# General Building Maintenance 24 Website
 
-> Modern, professional, and highly responsive static website for **House Maintenance 24 Hours**, serving **Dubai, Ajman, Sharjah, and Umm Al Quwain, UAE**.
+> Modern, professional, and highly responsive website for **General Building Maintenance 24**, serving **Dubai, Ajman, Sharjah, and Umm Al Quwain, UAE**.
 
-Built exclusively with **HTML5**, **CSS3**, and **Vanilla JavaScript**. 100% static, zero build tools, zero dependencies, ready for **GitHub Pages**.
+Built with **HTML5**, **CSS3**, and **Vanilla JavaScript** with Express server.
 
 ---
 
 ## 🏢 Business Overview
 
-- **Business Name**: House Maintenance 24 Hours
+- **Business Name**: General Building Maintenance 24
 - **Service Regions**: Dubai, Ajman, Sharjah, Umm Al Quwain, UAE
 - **Direct Phone**: `+971 52 292 9187`
 - **WhatsApp 1**: `+971 50 703 9506`

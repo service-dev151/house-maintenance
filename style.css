@@ -1,6 +1,6 @@
 /* ==========================================================================
-   HOUSE MAINTENANCE - MODERN RESPONSIVE DESIGN SYSTEM
-   Ajman • Sharjah • Umm Al Quwain, UAE
+   GENERAL BUILDING MAINTENANCE 24 - MODERN RESPONSIVE DESIGN SYSTEM
+   Dubai • Ajman • Sharjah • Umm Al Quwain, UAE
    Fully Mobile-First & Responsive across 320px to 1920px+
    GitHub Pages Compatible - Zero External Dependencies
    ========================================================================== */
@@ -515,8 +515,9 @@ ol {
 
 .back-to-top {
   position: fixed;
-  right: clamp(1rem, 2vw, 1.5rem);
-  bottom: clamp(1rem, 2vw, 1.5rem);
+  left: max(16px, env(safe-area-inset-left, 16px));
+  bottom: max(16px, env(safe-area-inset-bottom, 16px));
+  right: auto;
   width: 52px;
   height: 52px;
   border: none;
@@ -530,7 +531,7 @@ ol {
   line-height: 1;
   box-shadow: 0 12px 32px rgba(17, 24, 39, 0.18);
   cursor: pointer;
-  z-index: 1500;
+  z-index: 990;
   opacity: 0;
   visibility: hidden;
   pointer-events: none;
@@ -674,13 +675,15 @@ section[id] {
 .brand {
   display: flex;
   align-items: center;
-  gap: 10px;
-  min-width: 0;
-  flex-shrink: 1;
+  gap: 14px;
+  min-width: max-content;
+  flex-shrink: 0;
 }
 
 .brand__icon {
   flex-shrink: 0;
+  display: flex;
+  align-items: center;
 }
 
 .brand__text {
@@ -710,6 +713,13 @@ section[id] {
 }
 
 /* Desktop Navigation */
+.main-nav {
+  display: flex;
+  align-items: center;
+  margin-left: clamp(1.5rem, 2.5vw, 3.5rem);
+  flex-shrink: 0;
+}
+
 .nav-list {
   display: flex;
   align-items: center;
@@ -751,6 +761,7 @@ section[id] {
   display: flex;
   align-items: center;
   gap: var(--space-sm);
+  margin-left: auto;
   flex-shrink: 0;
 }
 
@@ -1260,6 +1271,41 @@ body[data-theme="dark"] .hero-section {
   border-color: var(--color-accent);
 }
 
+.service-card__media {
+  position: relative;
+  width: 100%;
+  height: 195px;
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  margin-bottom: var(--space-md);
+  background-color: var(--color-surface-subtle);
+  border: 1px solid var(--color-border);
+  flex-shrink: 0;
+}
+
+.service-card__img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  display: block;
+  transition: transform var(--transition-base);
+}
+
+.service-card:hover .service-card__img {
+  transform: scale(1.05);
+}
+
+.service-card__media .service-card__badge {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  z-index: 2;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.28);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+}
+
 .service-card__header {
   display: flex;
   align-items: center;
@@ -1269,15 +1315,7 @@ body[data-theme="dark"] .hero-section {
 }
 
 .service-card__icon-wrapper {
-  width: 50px;
-  height: 50px;
-  border-radius: var(--radius-md);
-  background-color: var(--color-surface-subtle);
-  border: 1px solid var(--color-border);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-shrink: 0;
+  display: none;
 }
 
 .service-card__badge {
@@ -1619,17 +1657,67 @@ body[data-theme="dark"] .hero-section {
   aspect-ratio: 16 / 10;
   background-color: var(--color-surface-subtle);
   overflow: hidden;
+  position: relative;
 }
 
+.gallery-split-view {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+.gallery-split-view img,
 .gallery-card__media img {
   width: 100%;
   height: 100%;
   object-fit: cover;
+  object-position: center;
+  display: block;
   transition: transform var(--transition-base);
 }
 
+.gallery-card:hover .gallery-split-view img,
 .gallery-card:hover .gallery-card__media img {
   transform: scale(1.04);
+}
+
+.gallery-split-labels {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  right: 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  pointer-events: none;
+  z-index: 3;
+}
+
+.gallery-badge {
+  font-size: 0.68rem;
+  font-weight: 800;
+  letter-spacing: 0.06em;
+  padding: 4px 9px;
+  border-radius: var(--radius-sm);
+  text-transform: uppercase;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+  display: inline-flex;
+  align-items: center;
+}
+
+.gallery-badge--before {
+  background-color: rgba(220, 38, 38, 0.92);
+  color: #ffffff;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+.gallery-badge--after {
+  background-color: rgba(22, 163, 74, 0.94);
+  color: #ffffff;
+  border: 1px solid rgba(255, 255, 255, 0.3);
 }
 
 .gallery-card__body {
@@ -2115,7 +2203,7 @@ body[data-theme="dark"] .hero-section {
   position: fixed;
   bottom: max(16px, env(safe-area-inset-bottom, 16px));
   right: max(16px, env(safe-area-inset-right, 16px));
-  z-index: 999;
+  z-index: 9999;
   display: flex;
   flex-direction: column;
   align-items: flex-end;
@@ -2217,6 +2305,7 @@ body[data-theme="dark"] .hero-section {
   border-radius: 50%;
   border: 2px solid var(--color-whatsapp);
   animation: pulse-ring 2s infinite cubic-bezier(0.215, 0.61, 0.355, 1);
+  pointer-events: none;
 }
 
 @keyframes pulse-ring {
@@ -2353,8 +2442,62 @@ body[data-theme="dark"] .hero-section {
    19. RESPONSIVE BREAKPOINTS (Tablets & Mobile)
    -------------------------------------------------------------------------- */
 
-/* TABLET & MOBILE DRAWER (<= 1024px) */
-@media (max-width: 1024px) {
+/* DESKTOP/LAPTOP INTERMEDIATE BREAKPOINT (992px - 1200px) */
+@media (min-width: 992px) and (max-width: 1200px) {
+  .site-header__inner {
+    gap: 8px;
+  }
+
+  .brand {
+    gap: 10px;
+    flex-shrink: 0;
+    min-width: max-content;
+  }
+
+  .brand__title {
+    font-size: clamp(1rem, 1.3vw, 1.16rem);
+  }
+
+  .brand__tagline {
+    font-size: 0.65rem;
+  }
+
+  .main-nav {
+    margin-left: clamp(1rem, 1.8vw, 2.2rem);
+    flex-shrink: 0;
+  }
+
+  .nav-list {
+    gap: clamp(8px, 1.1vw, 16px);
+  }
+
+  .nav-link {
+    font-size: clamp(0.78rem, 0.88vw, 0.85rem);
+    padding: 6px 0;
+  }
+
+  .header-actions {
+    gap: 6px;
+    margin-left: auto;
+    flex-shrink: 0;
+  }
+
+  .header-actions .btn--emergency-sm,
+  .header-actions .btn--whatsapp-sm {
+    padding: 6px 10px;
+    font-size: 0.78rem;
+    min-height: 36px;
+  }
+
+  .header-actions .theme-toggle {
+    padding: 6px 8px;
+    min-height: 36px;
+    font-size: 0.75rem;
+  }
+}
+
+/* TABLET & MOBILE DRAWER (<= 991px) */
+@media (max-width: 991px) {
   /* Navigation transforms into full slide-out drawer */
   .nav-toggle {
     display: flex;
@@ -2489,10 +2632,12 @@ body[data-theme="dark"] .hero-section {
   .mobile-menu-actions {
     display: flex;
     flex-direction: column;
-    gap: 10px;
-    margin-top: auto;
-    padding-top: var(--space-lg);
+    gap: 12px;
+    margin-top: 1.5rem;
+    padding-top: 1.25rem;
+    padding-bottom: 1rem;
     border-top: 1px solid var(--color-border);
+    flex-shrink: 0;
   }
 
   .mobile-menu-label {
@@ -2588,37 +2733,119 @@ body[data-theme="dark"] .hero-section {
 
 /* TABLETS & PHONES (<= 768px) */
 @media (max-width: 768px) {
-  /* Hero background carousel — keep the full image visible below the fixed header on mobile */
+  /* Mobile Hero: Dedicated Carousel Image above, Hero text & content cleanly below */
   .hero-section {
-    min-height: clamp(430px, 58vh, 560px);
+    min-height: auto;
     padding-top: 0;
-    padding-bottom: 1.25rem;
+    padding-bottom: 2rem;
+    display: flex;
+    flex-direction: column;
+    background: var(--color-bg);
+  }
+
+  .hero-section::before {
+    display: none !important;
   }
 
   .hero-background-carousel {
-    position: absolute;
-    inset: 0;
-    z-index: 0;
-    background-color: #0a0f1a;
+    position: relative;
+    inset: auto;
+    width: 100%;
+    height: clamp(230px, 52vw, 320px);
+    min-height: 220px;
+    z-index: 1;
+    overflow: hidden;
+    background-color: #0f172a;
+    border-bottom: 3px solid var(--color-accent);
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.12);
+    order: 1;
+    pointer-events: auto;
   }
 
   .hero-background-carousel img {
+    position: absolute;
+    inset: 0;
     width: 100%;
     height: 100%;
-    object-fit: contain;
-    object-position: center center;
-    transform: translateX(0) scale(1);
-    filter: saturate(1.08) contrast(1.04) brightness(0.72);
+    object-fit: cover;
+    object-position: center;
+    filter: saturate(1.1) contrast(1.05) brightness(0.96);
+    transform: translateX(0);
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.8s ease, transform 0.8s ease;
   }
 
   .hero-background-carousel img.is-active {
-    transform: translateX(0) scale(1);
+    opacity: 1;
+    visibility: visible;
+    transform: scale(1);
   }
 
   .hero-section__inner {
     position: relative;
     z-index: 2;
-    padding-top: clamp(0.5rem, 1vw, 1rem);
+    display: block;
+    width: 100%;
+    padding-top: 1.25rem;
+    order: 2;
+  }
+
+  .hero-content {
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    box-shadow: var(--shadow-sm);
+    padding: 1.25rem 1rem;
+    border-radius: var(--radius-lg);
+  }
+
+  .hero-title {
+    font-size: clamp(1.4rem, 5.2vw, 1.85rem);
+    color: var(--color-primary);
+    -webkit-text-stroke: 0;
+    text-shadow: none;
+    line-height: 1.25;
+    margin-bottom: var(--space-sm);
+  }
+
+  .hero-title .text-highlight {
+    color: var(--color-accent-hover);
+    text-shadow: none;
+    --text-stroke: 0;
+  }
+
+  .hero-subtitle {
+    color: var(--color-text-body);
+    text-shadow: none;
+    font-size: 0.95rem;
+    line-height: 1.55;
+    margin-bottom: var(--space-md);
+  }
+
+  .hero-features li {
+    background: var(--color-surface-subtle);
+    border: 1px solid var(--color-border);
+    color: var(--color-text-body);
+  }
+
+  .hero-features li strong {
+    color: var(--color-primary);
+  }
+
+  body[data-theme="dark"] .hero-title {
+    color: var(--color-text-main);
+  }
+
+  body[data-theme="dark"] .hero-title .text-highlight {
+    color: var(--color-accent);
+  }
+
+  body[data-theme="dark"] .hero-subtitle {
+    color: var(--color-text-body);
+  }
+
+  body[data-theme="dark"] .hero-features li strong {
+    color: #ffffff;
   }
 
   .top-bar {
@@ -2720,14 +2947,35 @@ body[data-theme="dark"] .hero-section {
 /* PHONES & NARROW SCREENS (<= 640px) */
 @media (max-width: 640px) {
   .brand {
-    max-width: calc(100% - 150px);
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    flex: 1 1 auto;
+    min-width: 0;
+    max-width: none;
+  }
+
+  .brand__icon {
+    flex-shrink: 0;
+  }
+
+  .brand__icon img {
+    width: 32px;
+    height: 32px;
+  }
+
+  .brand__text {
+    flex: 1 1 auto;
     min-width: 0;
   }
 
   .brand__title {
     white-space: normal;
-    line-height: 1.1;
-    letter-spacing: -0.015em;
+    line-height: 1.18;
+    letter-spacing: -0.01em;
+    font-size: clamp(0.85rem, 3.4vw, 1.05rem);
+    word-break: normal;
+    overflow: visible;
   }
 
   .brand__tagline {
@@ -2740,11 +2988,22 @@ body[data-theme="dark"] .hero-section {
 
   .theme-toggle {
     padding: 8px;
-    min-width: 40px;
+    min-width: 38px;
   }
 
   .header-actions {
+    flex-shrink: 0;
     gap: 6px;
+  }
+
+  .header-actions .btn--emergency-sm span,
+  .header-actions .btn--whatsapp-sm span {
+    display: none;
+  }
+
+  .header-actions .btn--emergency-sm,
+  .header-actions .btn--whatsapp-sm {
+    padding: 8px 10px;
   }
 
   .services-grid {
@@ -2784,6 +3043,12 @@ body[data-theme="dark"] .hero-section {
     grid-template-columns: 1fr;
   }
 
+  .floating-contact {
+    bottom: max(12px, env(safe-area-inset-bottom, 12px));
+    right: max(12px, env(safe-area-inset-right, 12px));
+    z-index: 9999;
+  }
+
   .floating-toggle {
     width: 50px;
     height: 50px;
@@ -2797,20 +3062,30 @@ body[data-theme="dark"] .hero-section {
 
 /* COMPACT SMARTPHONES (<= 414px) */
 @media (max-width: 414px) {
+  .brand {
+    gap: 10px;
+  }
+
   .brand__title {
-    font-size: 1.1rem;
+    font-size: clamp(0.82rem, 3.6vw, 0.94rem);
+    line-height: 1.16;
   }
 
   .brand__tagline {
-    font-size: 0.65rem;
+    display: none;
   }
 
   .hero-section {
-    min-height: clamp(390px, 52vh, 470px);
+    min-height: auto;
+  }
+
+  .hero-background-carousel {
+    height: 220px;
+    min-height: 200px;
   }
 
   .hero-background-carousel img {
-    object-position: center top;
+    object-position: center;
   }
 
   .header-actions .btn--whatsapp-sm span {
@@ -2837,8 +3112,26 @@ body[data-theme="dark"] .hero-section {
 
 /* ULTRA-COMPACT SMARTPHONES (<= 360px & 320px) */
 @media (max-width: 360px) {
+  .brand {
+    gap: 8px;
+  }
+
+  .brand__icon img {
+    width: 28px;
+    height: 28px;
+  }
+
+  .brand__title {
+    font-size: 0.8rem;
+    line-height: 1.14;
+  }
   .hero-section {
-    min-height: clamp(350px, 48vh, 420px);
+    min-height: auto;
+  }
+
+  .hero-background-carousel {
+    height: 200px;
+    min-height: 190px;
   }
 
   .container {

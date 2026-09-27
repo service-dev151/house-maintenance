@@ -1,5 +1,5 @@
 /**
- * House Maintenance 24 Hours - Core Vanilla JavaScript
+ * General Building Maintenance 24 - Core Vanilla JavaScript
  * Service Areas: Dubai, Ajman, Sharjah, Umm Al Quwain, UAE
  * GitHub Pages Compatible - Zero External Dependencies
  */
@@ -207,7 +207,7 @@ document.addEventListener('DOMContentLoaded', () => {
   syncHeaderMetrics();
   window.addEventListener('resize', () => {
     syncHeaderMetrics();
-    if (window.innerWidth > 1024 && mainNav && mainNav.classList.contains('is-open')) {
+    if (window.innerWidth > 991 && mainNav && mainNav.classList.contains('is-open')) {
       closeMenu();
     }
   });
@@ -314,7 +314,11 @@ document.addEventListener('DOMContentLoaded', () => {
         // Filter cards
         galleryCards.forEach((card) => {
           const category = card.getAttribute('data-category');
-          if (filter === 'all' || category === filter) {
+          const isMatch = filter === 'all' || 
+            category === filter || 
+            (filter.includes('appliance') && category.includes('appliance'));
+
+          if (isMatch) {
             card.style.display = 'block';
             setTimeout(() => {
               card.style.opacity = '1';
@@ -351,7 +355,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const details = reqDetails && reqDetails.value.trim() ? reqDetails.value.trim() : '[No additional details specified]';
 
     const formattedMessage = 
-`Hello House Maintenance,
+`Hello General Building Maintenance 24,
 
 I would like to request your service.
 
@@ -380,7 +384,9 @@ Please contact me regarding the service.`;
       e.preventDefault();
 
       if (!reqService || !reqService.value) {
-        alert('Please select a maintenance service first.');
+        if (typeof reqService.reportValidity === 'function') {
+          reqService.reportValidity();
+        }
         reqService.focus();
         return;
       }
@@ -396,7 +402,7 @@ Please contact me regarding the service.`;
 
       // Construct professional message exactly as specified
       const message = 
-`Hello House Maintenance,
+`Hello General Building Maintenance 24,
 
 I would like to request your service.
 
@@ -410,8 +416,14 @@ Please contact me regarding the service.`;
       // Build WhatsApp URL
       const whatsappUrl = `https://wa.me/${targetPhone}?text=${encodeURIComponent(message)}`;
 
-      // Open WhatsApp
-      window.open(whatsappUrl, '_blank', 'noopener,noreferrer');
+      // Open WhatsApp via anchor click to avoid iframe popup blocking
+      const chatLink = document.createElement('a');
+      chatLink.href = whatsappUrl;
+      chatLink.target = '_blank';
+      chatLink.rel = 'noopener noreferrer';
+      document.body.appendChild(chatLink);
+      chatLink.click();
+      chatLink.remove();
     });
   }
 
@@ -434,15 +446,8 @@ Please contact me regarding the service.`;
      -------------------------------------------------------------------------- */
   const floatingToggle = document.getElementById('floating-toggle');
   const floatingMenu = document.getElementById('floating-menu');
-  const floatingContact = document.getElementById('floating-contact');
 
   if (floatingToggle && floatingMenu) {
-    // On small mobile screens, start closed to avoid covering content
-    if (window.innerWidth <= 768) {
-      floatingMenu.classList.add('is-hidden');
-      floatingToggle.setAttribute('aria-expanded', 'false');
-    }
-
     floatingToggle.addEventListener('click', (e) => {
       e.stopPropagation();
       const isHidden = floatingMenu.classList.contains('is-hidden');
@@ -450,18 +455,6 @@ Please contact me regarding the service.`;
         floatingMenu.classList.remove('is-hidden');
         floatingToggle.setAttribute('aria-expanded', 'true');
       } else {
-        floatingMenu.classList.add('is-hidden');
-        floatingToggle.setAttribute('aria-expanded', 'false');
-      }
-    });
-
-    // Close floating speed dial when clicking anywhere outside
-    document.addEventListener('click', (e) => {
-      if (
-        floatingContact &&
-        !floatingContact.contains(e.target) &&
-        !floatingMenu.classList.contains('is-hidden')
-      ) {
         floatingMenu.classList.add('is-hidden');
         floatingToggle.setAttribute('aria-expanded', 'false');
       }
@@ -490,5 +483,5 @@ Please contact me regarding the service.`;
     });
   });
 
-  console.log('House Maintenance 24 Hours website initialized successfully. Serving Dubai, Ajman, Sharjah & Umm Al Quwain.');
+  console.log('General Building Maintenance 24 website initialized successfully. Serving Dubai, Ajman, Sharjah & Umm Al Quwain.');
 });
